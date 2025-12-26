@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>World Clock</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .clock-container {
+      background: #020617;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      width: 360px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .city {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .city:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="clock-container">
+    <h1>🌍 World Clock</h1>
+
+    <div class="city"><span>New York</span><span id="ny"></span></div>
+    <div class="city"><span>London</span><span id="london"></span></div>
+    <div class="city"><span>Dubai</span><span id="dubai"></span></div>
+    <div class="city"><span>Tokyo</span><span id="tokyo"></span></div>
+    <div class="city"><span>Sydney</span><span id="sydney"></span></div>
+    <div class="city"><span>India</span><span id="india"></span></div>
+  </div>
+
+  <script>
+    const cities = {
+      ny: "America/New_York",
+      london: "Europe/London",
+      dubai: "Asia/Dubai",
+      tokyo: "Asia/Tokyo",
+      sydney: "Australia/Sydney",
+      india: "Asia/Kolkata"
+    };
+
+    function updateTime() {
+      for (const [id, timezone] of Object.entries(cities)) {
+        const time = new Date().toLocaleTimeString("en-US", {
+          timeZone: timezone,
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit"
+        });
+        document.getElementById(id).textContent = time;
+      }
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
+  </script>
+</body>
+</html>
